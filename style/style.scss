@@ -1,0 +1,273 @@
+$baseFontSize: 16;
+$green: #1abc9c;
+$yellow: #f1c40f;
+$red: #c0392b;
+$blue: #3498db;
+$grey: #f2f2f2;
+
+$width-mobile: 400px;
+$width-mobile-half: 400px/2; 
+
+$width-tablet: 500px;
+$width-tablet-half: 500px/2;
+
+$width-mobile-mask-depth: 45px;
+$width-tablet-mask-depth: 85px;
+
+
+@function rem($val) {
+  @return #{$val}px;
+}
+
+.body {
+  font-size: #{$baseFontSize};
+}
+
+.limit{
+	width: 345px;
+}
+
+
+.minValue, .maxValue{
+    position: relative;
+  font-size:1em;
+}
+
+.minValue{
+	  left: -225px;
+  @media screen and (min-width : 970px) {
+	  left: -285px;
+  }
+}
+.maxValue{
+	left: 225px;
+  @media screen and (min-width : 970px) {
+	left: 285px;
+  }
+}
+.amtDiv{
+  width: 100px;
+  position: relative;
+  z-index: 100;
+  text-align: center;
+  top:-100px;
+  	@media screen and (min-width : 970px) {
+	top: -50px;
+	}
+}
+.amount{
+	font-size: rem(18);
+}
+.Min_Max {
+	text-align: center;
+	position:relative;
+	 top: -110px;
+	@media screen and (min-width : 970px) {
+	top: -60px;
+	}
+}
+.resp_arc_box{
+   margin:0 auto;
+  max-width: rem(500);
+  max-height: rem(250);
+  min-width: rem(250);
+  min-height: rem(250);
+  width: $width-mobile;
+  height: $width-mobile-half;
+  @media screen and (min-width : 970px) {
+	  width: $width-tablet;
+	  height: $width-tablet-half;
+  }
+
+	}
+// Gauge
+.mask {
+  position: relative;
+  overflow: hidden;
+  margin:0 auto;
+  display: block;
+
+    width: $width-mobile;
+  height: $width-mobile-half;
+  @media screen and (min-width : 970px) {
+	  width: $width-tablet;
+	  height: $width-tablet-half;
+  }
+  //width: 80%;
+  //height: 40%;
+  //margin: rem(20);
+
+}
+.semi-circle {
+  position: relative;
+
+  display: block;
+  width: $width-mobile;
+  height: $width-mobile-half;
+  @media screen and (min-width : 970px) {
+	  width: $width-tablet;
+	  height: $width-tablet-half;
+  }
+  //width: 80%;
+  //padding-top: 40%;  
+  background: #f2f2f2;
+ // background: linear-gradient(10deg, to right, $red 0%, $red 10%, $green 10%, $green);
+
+  border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+  	left: $width-mobile-mask-depth;
+  	right: $width-mobile-mask-depth;
+  	top: $width-mobile-mask-depth;
+    z-index: 2;
+
+    display: block;
+
+    background: #fff;
+
+    border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+  }      
+}
+
+.semi-circle--mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $width-mobile;
+  height: $width-mobile;
+  @media screen and (min-width : 970px) {
+	  width: $width-tablet;
+	  height: $width-tablet;
+  }
+  //width: 80%;
+  //padding-top: 80%;
+  background: transparent;
+/*
+
+  transition: all 3s ease-in-out;
+  */
+  backface-visibility: hidden;
+  transform:  translate3d(0,0,0);
+  transform-origin: center center;
+
+  -webkit-transform:  translate3d(0,0,0);
+  -webkit-transform-origin: center center;
+  -webkit-backface-visibility: hidden;
+
+  -ms-backface-visibility: hidden;
+  -ms-transform:  translate3d(0,0,0);
+  -ms-transform-origin: center center;
+  
+  
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+
+    display: block;
+
+  width: rem(402);
+  height: rem(202);
+   @media screen and (min-width : 970px) {
+	  width: rem(502);
+	  height: rem(252);
+  }
+   width: $width-mobile;
+  height: $width-mobile-half;
+  @media screen and (min-width : 970px) {
+	  width: $width-tablet + 2;
+	  height: $width-tablet-half + 2;
+  }
+  //width: 101%;
+  //padding-top: 51%;
+    margin: -1px 0 0 -1px;
+
+    background: #f2f2f2;
+
+    border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+  }      
+}
+
+
+$i: 0;
+@for $i from 0 through 100
+{
+   $angle : $i * 1.8;
+  .Rotate-#{$i}{
+  
+    -webkit-animation-name: Rotate-Angle#{$i};
+    -webkit-animation-duration: 3000ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: Rotate-Angle#{$i};
+    -moz-animation-duration: 3000ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-name: Rotate-Angle#{$i};
+    -ms-animation-duration: 3000ms;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: linear;
+    -ms-animation-fill-mode: forwards;
+  }
+ @-ms-keyframes Rotate-Angle#{$i} {
+	from { -ms-transform: rotate(0deg); }
+	to { -ms-transform: rotate(#{$angle}deg); }
+}
+	@-moz-keyframes Rotate-Angle#{$i} {
+		from { -moz-transform: rotate(0deg); }
+		to { -moz-transform: rotate(#{$angle}deg); }
+	}
+	@-webkit-keyframes Rotate-Angle#{$i} {
+		from { -webkit-transform: rotate(0deg); }
+		to { -webkit-transform: rotate(#{$angle}deg); }
+	}
+	@keyframes Rotate-Angle#{$i} {
+		from {
+			transform:rotate(0deg);
+		}
+		to {
+			transform:rotate(#{$angle}deg);
+		}
+	}
+
+  .semi-circle-style-#{$i}{
+
+		$pc: "%";
+		$percent: #{$i}#{$pc};
+		@if $angle < 45 {
+		   $angle : $angle/2;
+		}
+        $safari-angle: 90 - $angle;
+		background: -webkit-linear-gradient(#{$safari-angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);
+		background: linear-gradient(#{$angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);
+		background: -ms-linear-gradient(#{$safari-angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);	
+	}
+}
+
+.semi-circle {
+    &::before {
+      content: "";
+      bottom: 0;
+      left: 50px;
+      right: 50px;
+      top: 50px;
+	  @media screen and (min-width : 970px) {
+      left: 60px;
+      right: 60px;
+      top: 60px;
+	  }
+    }      
+  }
+@media screen and (max-width : 320px) /*  PHONE VIEW   */
+{
+
+}

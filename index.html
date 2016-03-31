@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AnimateArcApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Animation Example</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+   <script src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
+  <script src="script/script.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+
+        <div class=" row" ng-controller="AnimateArcController">
+
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                <div class="resp_arc_box">
+                    <div class="  mask">
+                        <div id="progress" class="semi-circle {{ProgressClass}}"> </div>
+                        <div id="semi-circle-maskID" class="semi-circle--mask {{CashBackClass}}"></div>
+                </div>
+                    </div>
+            </div>
+            <div class=" col-sm-12 col-xs-12 col-md-12 col-lg-12 amtDiv" >
+                <label class="amount">Transferred :${{TransferAmount}} </label><br>
+                <span class="currentamt">CashBack: ${{CashBack}}</span>
+            </div>
+
+            <div class=" col-sm-12 col-xs-12 col-md-12 col-lg-12 " >
+                <div class="Min_Max">
+                <span class="minValue">$0</span>
+                <span class="maxValue">$500</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+
+                <button type="button" class="btn btn-primary" ng-click="PlotArc()">Animate</button>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</script>
+ 
+</html>
+
+    
+    
