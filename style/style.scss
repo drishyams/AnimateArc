@@ -4,6 +4,8 @@ $yellow: #f1c40f;
 $red: #c0392b;
 $blue: #3498db;
 $grey: #f2f2f2;
+$start-smart-color-light-blue--mobile: #5497c3;
+$start-smart-color--light-green: #61ae3b;
 
 $width-mobile: 400px;
 $width-mobile-half: 400px/2; 
@@ -18,6 +20,28 @@ $width-tablet-mask-depth: 85px;
 @function rem($val) {
   @return #{$val}px;
 }
+@mixin Rotate($rotate-degree) {
+    -webkit-transition-duration: 3s; /* Safari */
+    transition-duration: 3s;
+    -ms-transition-duration: 3s;
+     -moz-transition-duration: 3s;
+    -webkit-transition-timing-function: linear;
+    -ms-transition-timing-function: linear;
+    transition-timing-function: linear;
+    -moz-transition-timing-function: linear;
+    -webkit-transform: rotate($rotate-degree);
+    -ms-transform: rotate($rotate-degree);
+    -moz-transform: rotate($rotate-degree);
+    transform: rotate($rotate-degree);
+}
+
+@mixin semi-circle($web-deg, $deg, $ms-deg, $color1, $color2, $percent)
+{
+    background: -webkit-linear-gradient($web-deg, $color1 0%, $color1 $percent, $color2 $percent, $color2);
+    background: linear-gradient($deg, $color1 0%, $color1 $percent, $color2 $percent, $color2);
+    background: -ms-linear-gradient($ms-deg, $color1 0%, $color1 $percent, $color2 $percent, $color2);
+}
+
 
 .body {
   font-size: #{$baseFontSize};
@@ -196,60 +220,38 @@ $width-tablet-mask-depth: 85px;
 }
 
 
-$i: 0;
-@for $i from 0 through 100
+$angle_inc: 0;
+
+@for $angle_inc from 0 through 100
 {
-   $angle : $i * 1.8;
-  .Rotate-#{$i}{
-  
-    -webkit-animation-name: Rotate-Angle#{$i};
-    -webkit-animation-duration: 3000ms;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-name: Rotate-Angle#{$i};
-    -moz-animation-duration: 3000ms;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: linear;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation-name: Rotate-Angle#{$i};
-    -ms-animation-duration: 3000ms;
-    -ms-animation-iteration-count: 1;
-    -ms-animation-timing-function: linear;
-    -ms-animation-fill-mode: forwards;
-  }
- @-ms-keyframes Rotate-Angle#{$i} {
-	from { -ms-transform: rotate(0deg); }
-	to { -ms-transform: rotate(#{$angle}deg); }
-}
-	@-moz-keyframes Rotate-Angle#{$i} {
-		from { -moz-transform: rotate(0deg); }
-		to { -moz-transform: rotate(#{$angle}deg); }
+	$angle : $angle_inc * 1.8;
+
+	.Rotate-#{$angle_inc}{
+		@include Rotate(#{$angle}deg);
 	}
-	@-webkit-keyframes Rotate-Angle#{$i} {
-		from { -webkit-transform: rotate(0deg); }
-		to { -webkit-transform: rotate(#{$angle}deg); }
-	}
-	@keyframes Rotate-Angle#{$i} {
-		from {
-			transform:rotate(0deg);
-		}
-		to {
-			transform:rotate(#{$angle}deg);
-		}
+	$pc: "%";
+	$percent: #{$angle_inc}#{$pc};
+	
+	@if $angle_inc <= 10 {
+		$percent: #{$angle_inc*2}#{$pc};
+	} @else if $angle_inc <= 30 {
+		$percent: #{$angle_inc + 8}#{$pc};
+	} @else if $angle_inc <= 40 {
+		$percent: #{$angle_inc + 5}#{$pc};
 	}
 
-  .semi-circle-style-#{$i}{
+    $safari-angle: 90 - $angle;
+	
+	/* Class to inject when deposit is greater than cashback */
+	.semi-circle-style-#{$angle_inc}{
 
-		$pc: "%";
-		$percent: #{$i}#{$pc};
-		@if $angle < 45 {
-		   $angle : $angle/2;
-		}
-        $safari-angle: 90 - $angle;
-		background: -webkit-linear-gradient(#{$safari-angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);
-		background: linear-gradient(#{$angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);
-		background: -ms-linear-gradient(#{$safari-angle}deg, #5497c3 0%, #5497c3 #{$percent}, #61ae3b #{$percent}, #61ae3b);	
+		@include semi-circle(#{$safari-angle}deg, #{$angle}deg, #{$safari-angle}deg, $start-smart-color-light-blue--mobile, $start-smart-color--light-green, $percent);
+	}
+	
+	/* Class to inject when cashback is grater than deposit */
+	.semi-circle-style-reverse-#{$angle_inc}{
+
+		@include semi-circle(#{$safari-angle}deg, #{$angle}deg, #{$safari-angle}deg,  $start-smart-color--light-green, $start-smart-color-light-blue--mobile, $percent);
 	}
 }
 
